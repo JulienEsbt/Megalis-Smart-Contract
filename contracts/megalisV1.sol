@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: JulienEsterbet - SIB
+//SPDX-License-Identifier: UNLICENSED
 
 pragma solidity ^0.8.0;
 
@@ -13,7 +13,7 @@ contract megalisV1 {
     }
 
     // Création d'un évènement, ce qui nous permettra notamment de l'appeler ensuite dans notre frontend.
-    event NewPublication(address _publisher, string indexed _siren, string _url, bytes32 indexed _hash, uint256 indexed _timestamp);
+    event NewPublication(address _publisher, string indexed _siren, string _url, bytes32 indexed _hash, uint256 indexed _timestamp, StateType _state);
 
     // Création d'un struct pour la publication.
     struct Publication {
@@ -41,30 +41,35 @@ contract megalisV1 {
         console.log("Le Smart Contract a bien ete deploye. Il vous permettra de publier sur la blockchain un document (son URL et son Hash) avec son horodatage et un numero d'identification propore a votre collectivite.");
     }
 
-    function publish(string memory publisher_siren, string memory doc_url, bytes32 doc_hash, uint256 doc_timestamp) public {
+    function publish(string memory publisher_siren, string memory doc_url, bytes32 doc_hash) public {
         // L'ID de la publication est le numéro de hash du document.
         PublicationID = string(abi.encodePacked("", doc_hash)) ;
 
         // Permet de stocker la publication dans l'array
-        publications.push(Publication(msg.sender, publisher_siren, doc_url, doc_hash, doc_timestamp, StateType.OnGoing));
+        publications.push(Publication(msg.sender, publisher_siren, doc_url, doc_hash, block.timestamp, StateType.OnGoing));
         //Publication memory PublicationID = Publication(msg.sender, publisher_siren, doc_url, doc_hash, doc_timestamp, StateType.OnGoing);
 
         // Permet d'ajouter la publication à l'évènement créé au dessus.
-        emit NewPublication(msg.sender, publisher_siren, doc_url, doc_hash, doc_timestamp);
+        emit NewPublication(msg.sender, publisher_siren, doc_url, doc_hash, block.timestamp, StateType.OnGoing);
 
         // console.log("L'adresse %s, de numero siren %s, a publie le document dont l'url est %s et le hash %s a %s", msg.sender, publisher_siren, doc_url, doc_hash, doc_timestamp);
     }
 
     function listPublications(string memory publisher_siren) public {
-
+        // A faire dans le front pas dans le smart contract
     }
 
     function listOnGoingPublications(string memory publisher_siren) public {
-
+        // A faire dans le front pas dans le smart contract
     }
 
     function listAllPublications() public {
+        // A faire dans le front pas dans le smart contract
+    }
 
+    function deleteEvent (bytes32 Doc_Hash) public {
+        //TODO
+        // Simplement mettre le StateType sur finish et plus en OnGoing, mais je ne sais pas encore si c'est faisable de modifier un event
     }
 
 }
