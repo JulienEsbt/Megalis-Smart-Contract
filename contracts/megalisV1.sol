@@ -43,7 +43,7 @@ contract megalisV1 {
 
     function publish(string memory publisher_siren, string memory doc_url, bytes32 doc_hash) public {
         // L'ID de la publication est le numéro de hash du document.
-        PublicationID = string(abi.encodePacked("", doc_hash)) ;
+        PublicationID = string(abi.encodePacked("", doc_hash));
 
         // Permet de stocker la publication dans l'array
         publications.push(Publication(msg.sender, publisher_siren, doc_url, doc_hash, block.timestamp, StateType.OnGoing));
@@ -56,6 +56,7 @@ contract megalisV1 {
     }
 
     function listPublications(string memory publisher_siren) public {
+        //TODO
         // A faire dans le front pas dans le smart contract
     }
 
@@ -63,13 +64,12 @@ contract megalisV1 {
         // A faire dans le front pas dans le smart contract
     }
 
-    function listAllPublications() public {
-        // A faire dans le front pas dans le smart contract
+    function UpdateEvent (bytes32 Doc_Hash) public {
+        // Simplement mettre le StateType sur finish et plus sur OnGoing, mais je ne sais pas encore si c'est faisable de modifier un event
     }
 
-    function deleteEvent (bytes32 Doc_Hash) public {
-        //TODO
-        // Simplement mettre le StateType sur finish et plus en OnGoing, mais je ne sais pas encore si c'est faisable de modifier un event
+    function getAllPublications() public view returns (Publication[] memory) {
+        return publications;
     }
 
 }
