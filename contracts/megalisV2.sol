@@ -31,13 +31,14 @@ contract megalisV2 {
     address[] public tab_publisher;
 
     constructor() {
-
+        /*
         // Création d'une publication, sans doute à retirer ensuite
         pubmap[msg.sender].push(Publication("InitSiren", "https://InitUrl.com", "InitHashDoc", block.timestamp, StateType.OnGoing));
         if(existingInTab(msg.sender) == false){
             tab_publisher.push(msg.sender) ;
         }
         emit NewPublication(msg.sender, "Siren1", "https://url1.com", "HashDuDoc1", block.timestamp, StateType.OnGoing);
+        */
 
         console.log("Le Smart Contract a bien ete deploye. Il vous permettra de publier sur la blockchain un document (son URL et son Hash) avec son horodatage et un numero d'identification propore a votre collectivite.");
     }
@@ -63,14 +64,17 @@ contract megalisV2 {
     }
 
     function getAllPublications() public view returns (Publication[] memory) {
-        /*Publication[] memory result;
+        /*
+        // V1
+        Publication[] memory result;
         for (uint i = 0; i < tab_publisher.length-1; i++){
             //Trouver un moyen de push, ou en tout cas de pouvoir tout mettre dans result pour pouvoir tout print ensuite. Car pour l'instant ça ne met que le dernier élément.
             //result = pubmap[tab_publisher[i]];
             result = result.push(pubmap[tab_publisher[i]]);
         }
-        return result;*/
+        return result;
 
+        // V2
         Publication[] memory result;
         uint256 cpt = 0;
         for (uint256 i = 0; i < tab_publisher.length; i++){
@@ -82,6 +86,16 @@ contract megalisV2 {
                 for ( uint256 j = 0; j < index.length; j++){
                     result[j + cpt] = index[j];
                 }
+            }
+        }
+        return result;
+        */
+
+        // V3
+        Publication[] memory result;
+        for (uint256 i = 0; i < tab_publisher.length; i++){
+            for ( uint256 j = 0; j < pubmap[tab_publisher[i]].length; j++ ){
+                result[i+j] = pubmap[tab_publisher[i]][1];
             }
         }
         return result;

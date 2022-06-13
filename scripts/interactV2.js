@@ -24,7 +24,7 @@ async function main() {
     /*
     console.log("Initialisation d'une publication : ");
     console.log("Chargement...");
-    const tx = await megalisV2Contract.publish("Siren2", "https://url2.com", "HashDuDoc2");
+    const tx = await megalisV2Contract.publish("Siren5", "https://url5.com", "HashDuDoc5");
     await tx.wait();
     console.log("Done.");
     */
@@ -33,13 +33,20 @@ async function main() {
     const sirens = await megalisV2Contract.getAllSirens();
     console.table(sirens);
 
+    /*
+    // TODO Bug à refaire
     console.log("Liste de toutes les publications : ");
     const allPublications = await megalisV2Contract.getAllPublications();
     console.table(allPublications);
+    */
 
     console.log("Liste des publications de l'adresse 0x858077f49B961ef27b0B09313BedFE33Aca0ca44 : ");
     const sirenPublications = await megalisV2Contract.getSirenPublications("0x858077f49B961ef27b0B09313BedFE33Aca0ca44");
     console.table(sirenPublications);
-}
 
+    console.log("Liste des publications de l'adresse 0xFAECdDcc975965A9881638140736945934a63f4B : ");
+    const sirenPublications2 = await megalisV2Contract.getSirenPublications("0xFAECdDcc975965A9881638140736945934a63f4B");
+    console.table(sirenPublications2);
+
+}
 main()
