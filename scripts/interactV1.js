@@ -1,8 +1,8 @@
 const ROPSTEN_ALCHEMY_API_KEY = process.env.ROPSTEN_ALCHEMY_API_KEY
 const PRIVATE_KEY1 = process.env.PRIVATE_KEY1
 const PRIVATE_KEY2 = process.env.PRIVATE_KEY2
-const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS_V2
-const contract = require("../artifacts/contracts/megalisV2.sol/megalisV2.json")
+const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS_V1
+const contract = require("../artifacts/contracts/megalisV1.sol/megalisV1.json")
 
 // Provider
 const alchemyProvider = new ethers.providers.AlchemyProvider(
@@ -82,14 +82,13 @@ async function main() {
     const sirenPublications3 = await megalisV2Contract.getSirenPublications("Siren3");
     console.table(sirenPublications3);
 
-
     console.log("Liste des publications de siren4 : ");
     const sirenPublications4 = await megalisV2Contract.getSirenPublications("Siren4");
     console.table(sirenPublications4);
     */
 
     /*
-    // TODO Bug à refaire
+    // TODO Bug : getAllPublications() à refaire dans le contrat
     console.log("Liste de toutes les publications : ");
     const allPublications = await megalisV2Contract.getAllPublications();
     console.table(allPublications);
