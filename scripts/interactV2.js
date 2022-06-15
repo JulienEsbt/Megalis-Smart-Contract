@@ -23,10 +23,10 @@ const megalisV2Contract = new ethers.Contract(
 async function main() {
     /*
     console.log("Initialisation d'une publication : ");
-    console.log("Chargement...");
-    const tx = await megalisV2Contract.publish("Siren5", "https://url5.com", "HashDuDoc5");
+    const tx = await megalisV2Contract.publish("Siren", "https://url.com", "HashDuDoc");
+    console.log("Mining...", tx.hash);
     await tx.wait();
-    console.log("Done.");
+    console.log("Mined -- ", tx.hash);
     */
 
     console.log("Liste des adresses ayant publié quelque chose : ");
