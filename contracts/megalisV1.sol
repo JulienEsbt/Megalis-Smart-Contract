@@ -6,14 +6,9 @@ import "hardhat/console.sol";
 
 contract megalisV1 {
 
-    // Création de deux états pour une publication : "en cours" et "finit".
-    enum StateType {
-        OnGoing,
-        Finish
-    }
-
     // Création d'un évènement, ce qui nous permettra d'appeler le contract dans le frontend.
-    event NewPublication(address _publisher, string indexed _siren, string _url, string indexed _hash, uint256 indexed _timestamp, StateType _state);
+    event NewPublication(address _publisher, string /*indexed*/ _siren, string /*indexed*/ _url,
+        string /*indexed*/ _hash, uint256 /*indexed*/ _timestamp);
 
     // Création d'une structure pour la publication.
     struct Publication {
@@ -22,14 +17,6 @@ contract megalisV1 {
         string Doc_url;
         string Doc_hash;
         uint256 Doc_timestamp;
-        StateType State;
-        /* Pour Doc_hash, on pourrait utiliser la fonction keccak256() (ou sha256()) pour créer directement le hash du
-        pdf après l'avoir input, mais je ne sais pour le moment techniquement pas comment le faire, à voir si on fait ça
-        avec juste un scanner classique dans lequel l'utilisateur entre simplement le titre du doc, copie colle tout le
-        document (si c'est un fichier txt par exemple), ou même importe le pdf. Pour le moment nous allons faire comme
-        si nous avions directement le hash du document. Je pense qu'il serait possible de créer un autre smart contract
-        ou un autre programme qui nous permettrait d'import le document et d'utiliser une fonction de hachage pour avoir
-        le hash directement. */
     }
 
     // Création d'un mapping Siren-->Publication (Clé-->Valeur).
@@ -56,7 +43,7 @@ contract megalisV1 {
     // Fonction qui permet de publier un doc
     function publish(string memory publisher_siren, string memory doc_url, string memory doc_hash) public {
         // Ajout d'un mapping avec le siren du publisher comme clé et un tableau avec les informations comme valeur.
-        pubmap[publisher_siren].push(Publication(msg.sender, publisher_siren, doc_url, doc_hash, block.timestamp, StateType.OnGoing));
+        pubmap[publisher_siren].push(Publication(msg.sender, publisher_siren, doc_url, doc_hash, block.timestamp));
 
         // Ajoute le Siren dans le tableau s'il n'y est pas déjà
         if (existingInTab(publisher_siren) == false){
@@ -64,7 +51,7 @@ contract megalisV1 {
         }
 
         // Permet d'ajouter la publication à l'évènement, pour pouvoir y accéder dans le front.
-        emit NewPublication(msg.sender, publisher_siren, doc_url, doc_hash, block.timestamp, StateType.OnGoing);
+        emit NewPublication(msg.sender, publisher_siren, doc_url, doc_hash, block.timestamp);
     }
 
     // TODO Permet de voir toutes les publications de tous les Sirens, mais ne fonctionne pas et je bug dessus.
