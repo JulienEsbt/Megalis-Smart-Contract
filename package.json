@@ -15,5 +15,8 @@
     "ethereum-waffle": "^3.4.4",
     "ethers": "^5.0.0",
     "hardhat": "^2.9.7"
+  },
+  "dependencies": {
+    "metamask-extension-provider": "^3.0.0"
   }
 }

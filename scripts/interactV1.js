@@ -1,31 +1,37 @@
-const ROPSTEN_ALCHEMY_API_KEY = process.env.ROPSTEN_ALCHEMY_API_KEY
-const GOERLI_ALCHEMY_API_KEY = process.env.GOERLI_ALCHEMY_API_KEY
-const POLYGON_MUMBAI_BLAST_API_KEY = "45b75e5c-bd21-4b10-8e72-381013ae52fb"
-const PRIVATE_KEY1 = process.env.PRIVATE_KEY1
-const PRIVATE_KEY2 = process.env.PRIVATE_KEY2
-const CONTRACT_ADDRESS_ROPSTEN = process.env.CONTRACT_ADDRESS_V1_ROPSTEN
-const CONTRACT_ADDRESS_GOERLI = process.env.CONTRACT_ADDRESS_V1_GOERLI
-const CONTRACT_ADDRESS_V1_POLYGON_MUMBAI = process.env.CONTRACT_ADDRESS_V1_POLYGON_MUMBAI
-const CONTRACT_ADDRESS_V1_GNOSIS = "0xD3D67E39E3399fC28242BAC053Fb63c4A0bfbe48";//CONTRACT_ADDRESS_V1_GNOSIS = process.env.CONTRACT_ADDRESS_V1_GNOSIS
+const {PRIVATE_KEY1, PRIVATE_KEY2, PRIVATE_KEY3} = process.env
+
+const {
+    CONTRACT_ADDRESS_V1_ROPSTEN,
+    CONTRACT_ADDRESS_V1_RINKEBY,
+    CONTRACT_ADDRESS_V1_KOVAN,
+    CONTRACT_ADDRESS_V1_GOERLI,
+    CONTRACT_ADDRESS_V1_POLYGON_MUMBAI,
+    CONTRACT_ADDRESS_V1_GNOSIS
+} = process.env
+
+const {ROPSTEN_ALCHEMY_API_KEY, GOERLI_ALCHEMY_API_KEY, BLAST_API_KEY} = process.env
+
 const contract = require("../artifacts/contracts/megalisV1.sol/megalisV1.json")
 
 // Provider
-const alchemyProvider = new ethers.providers.AlchemyProvider(
-    //(network = "ropsten"),
-    //(network = "goerli"),,
-    (network.gnosis),
-    //ROPSTEN_ALCHEMY_API_KEY
-    //GOERLI_ALCHEMY_API_KEY
-    POLYGON_MUMBAI_BLAST_API_KEY
+const provider = new ethers.providers.JsonRpcProvider(
+    //`https://eth-ropsten.alchemyapi.io/v2/${ROPSTEN_ALCHEMY_API_KEY}`, "ropsten"
+    //`https://eth-rinkeby.blastapi.io/${BLAST_API_KEY}`, "rinkeby"
+    //`https://eth-kovan.blastapi.io/${BLAST_API_KEY}`, "kovan"
+    //`https://eth-goerli.g.alchemy.com/v2/${GOERLI_ALCHEMY_API_KEY}`, "goerli"
+    //`https://polygon-testnet.blastapi.io/${BLAST_API_KEY}`
+    `https://gnosis-mainnet.blastapi.io/${BLAST_API_KEY}`
 )
 
 // Signer
-const signer = new ethers.Wallet(PRIVATE_KEY1, alchemyProvider)
+const signer = new ethers.Wallet(PRIVATE_KEY3, provider)
 
 // Contract
 const megalisV1Contract = new ethers.Contract(
-    //CONTRACT_ADDRESS_ROPSTEN,
-    //CONTRACT_ADDRESS_GOERLI,
+    //CONTRACT_ADDRESS_V1_ROPSTEN,
+    //CONTRACT_ADDRESS_V1_RINKEBY,
+    //CONTRACT_ADDRESS_V1_KOVAN,
+    //CONTRACT_ADDRESS_V1_GOERLI,
     //CONTRACT_ADDRESS_V1_POLYGON_MUMBAI,
     CONTRACT_ADDRESS_V1_GNOSIS,
     contract.abi,
@@ -35,7 +41,7 @@ const megalisV1Contract = new ethers.Contract(
 async function main() {
     /*
     console.log("Initialisation d'une publication : ");
-    const tx = await megalisV1Contract.publish("Siren1", "https://url1.com", "HashDuDoc1");
+    const tx = await megalisV1Contract.publish("Siren1", "http://url1.com", "HashDuDoc1");
     console.log("Mining...", tx.hash);
     await tx.wait();
     console.log("Mined -- ", tx.hash);
@@ -99,12 +105,6 @@ async function main() {
     console.table(sirenPublications4);
     */
 
-    /*
-    // TODO Bug : getAllPublications() à refaire dans le contrat
-    console.log("Liste de toutes les publications : ");
-    const allPublications = await megalisV1Contract.getAllPublications();
-    console.table(allPublications);
-    */
-
 }
+
 main()
