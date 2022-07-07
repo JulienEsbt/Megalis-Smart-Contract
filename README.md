@@ -1,6 +1,6 @@
 ## Megalis Project - V1 du Smart Contract
 
-### _I. Pour commencer voici  les fonctionnalitées que possède le SmartContract :_
+### _I. Pour commencer voici les fonctionnalités que possède le SmartContract :_
 
 ##### Version 1 :
 - Fonction avec signature : 
@@ -20,10 +20,10 @@ fonction listerPublication(siren)
 ```
 
 ##### Version 2 :
-Dans la version deux, nous avons les mêmes foncitonnalités mais avec la suppression du hash du document publié, puisque celui-ci est dans l'Url du document, et que cela prends de la place (et donc a un coût) lors de la publication.
+Dans la version deux, nous avons les mêmes fonctionnalités mais avec la suppression du hash du document publié, puisque celui-ci est dans l'Url du document, et que cela prends de la place (et donc a un coût) lors de la publication.
 
 #
-### _II. Voici comment l'intaller, le déployer, intéragir avec, ou le modifier :_
+### _II. Voici comment l'installer, le déployer, interagir avec, ou le modifier :_
 ##### a. Installer :
 1. Le cloner sur votre machine depuis le Git
 2. Installer les modules nécessaires (hardhat, ethers, dotenv, ...) via la commande : ```npm install```
