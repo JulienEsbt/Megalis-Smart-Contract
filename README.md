@@ -66,6 +66,7 @@ L'adresse de votre nouveau smart contract sera ainsi : "0x347a2ea7BC38A50B53a119
 Ethers.js : https://docs.ethers.io/v5/  
 Web3.js : https://web3js.readthedocs.io/en/v1.7.3/index.html#   
 Ethereum : https://ethereum.org/en/developers/docs/     
+Hardhat : https://hardhat.org/getting-started   
 Metamask : https://docs.metamask.io/guide/  
 WalletConnect : https://docs.walletconnect.com/     
 JavaScript : https://devdocs.io/javascript/     
