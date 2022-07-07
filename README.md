@@ -22,6 +22,7 @@ fonction listerPublication(siren)
 ##### Version 2 :
 Dans la version deux, nous avons les mêmes foncitonnalités mais avec la suppression du hash du document publié, puisque celui-ci est dans l'Url du document, et que cela prends de la place (et donc a un coût) lors de la publication.
 
+#
 ### _II. Voici comment l'intaller, le déployer, intéragir avec, ou le modifier :_
 ##### a. Installer :
 1. Le cloner sur votre machine depuis le Git
@@ -53,23 +54,14 @@ cmd =       npx hardhat run scripts/deployV2.js --network networkNameThatYouChoo
 result =    Deploying contracts with the account: 0x82de905E53cB57Cfd7c1e9B7552a175756d96EFd
             Contract address: 0x347a2ea7BC38A50B53a1197f4195a39d0692a893
 ```
-
-Et l'adresse de votre nouveau smart contract sera ainsi : "0x347a2ea7BC38A50B53a1197f4195a39d0692a893", vous pouvez aller vérifier dans ce que l'on appelle un blockchain explorer, avec les liens suivants en fonctions du réseau sur lequel le contrat a été déployé :    
-Ethereum (Mainnet) : 'https://etherscan.io/'    
-Ropsten (Ethereum Testnet) : 'https://ropsten.etherscan.io/'    
-Goerli (Ethereum Testnet) : 'https://goerli.etherscan.io/'  
-Rinkeby (Ethereum Testnet) : 'https://rinkeby.etherscan.io/'    
-Kovan (Ethereum Testnet) : 'https://kovan.etherscan.io/'    
-Gnosis (Mainnet - XDai Chain) : 'https://blockscout.com/xdai/mainnet/'  
-Polygon (Mainnet - Matic) : 'https://polygonscan.com/')     
-Mumbai (Polygon Testnet) : 'https://mumbai.polygonscan.com/'    
+L'adresse de votre nouveau smart contract sera ainsi : "0x347a2ea7BC38A50B53a1197f4195a39d0692a893", vous pourrez donc aller vérifier dans un "blockchain explorer" la création de ce contrat (Lien plus loin).
 
 ##### d. Interagir : 
 1. Vous aurez besoin de 3 paramètres, que sont la clé privée, l'adresse du contrat et la clé API, il vous faudra donc les mettre à jour en fonction de votre fichier ".env". 
 2. Dans la fonction main, vous pouvez modifier le code afin d'appeler les fonctions du fichier ".sol" que vous voulez utiliser pour interagir avec le contrat.
 
-
-### Liens importants : 
+#
+### _III. Liens importants :_
 ##### a. Docs :
 Ethers.js : https://docs.ethers.io/v5/  
 Web3.js : https://web3js.readthedocs.io/en/v1.7.3/index.html#   
@@ -78,14 +70,24 @@ Metamask : https://docs.metamask.io/guide/
 WalletConnect : https://docs.walletconnect.com/     
 JavaScript : https://devdocs.io/javascript/     
 
-##### b. Providers : 
+##### b. Explorer : 
+Ethereum (Mainnet) : https://etherscan.io/    
+Ropsten (Ethereum Testnet) : https://ropsten.etherscan.io/    
+Goerli (Ethereum Testnet) : https://goerli.etherscan.io/  
+Rinkeby (Ethereum Testnet) : https://rinkeby.etherscan.io/    
+Kovan (Ethereum Testnet) : https://kovan.etherscan.io/    
+Gnosis (Mainnet - XDai Chain) : https://blockscout.com/xdai/mainnet/  
+Polygon (Mainnet - Matic) : https://polygonscan.com/     
+Mumbai (Polygon Testnet) : https://mumbai.polygonscan.com/
+
+##### c. Providers : 
 Alchemy : https://dashboard.alchemyapi.io/  
 Blast : https://blastapi.io/dashboard   
 Infura : https://infura.io/dashboard    
 GetBlock : https://account.getblock.io/     
 Moralis : https://docs.moralis.io/introduction/readme   
 
-##### c. Autres : 
+##### d. Autres : 
 ChainList : https://chainlist.org/  
 Chainlink faucet : https://faucets.chain.link/  
 Metamask faucet : https://faucet.metamask.io/   
