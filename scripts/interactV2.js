@@ -46,26 +46,6 @@ async function main() {
     await tx.wait();
     console.log("Mined -- ", tx.hash);
 
-    console.log("Initialisation d'une publication : ");
-    const tx2 = await megalisV2Contract.publish("Siren2", "https://url2.com");
-    console.log("Mining...", tx2.hash);
-    await tx2.wait();
-    console.log("Mined -- ", tx2.hash);
-
-    console.log("Initialisation d'une publication : ");
-    const tx3 = await megalisV2Contract.publish("Siren1", "https://url3.com");
-    console.log("Mining...", tx3.hash);
-    await tx3.wait();
-    console.log("Mined -- ", tx3.hash);
-
-    console.log("Initialisation d'une publication : ");
-    const tx4 = await megalisV2Contract.publish("Siren1", "https://url4.com");
-    console.log("Mining...", tx4.hash);
-    await tx4.wait();
-    console.log("Mined -- ", tx4.hash);
-    */
-
-    /*
     console.log("Liste des adresses ayant publié quelque chose : ");
     const sirens = await megalisV2Contract.getAllSirens();
     console.table(sirens);
@@ -73,10 +53,6 @@ async function main() {
     console.log("Liste des publications de siren1 : ");
     const sirenPublications = await megalisV2Contract.getSirenPublications("Siren1");
     console.table(sirenPublications);
-
-    console.log("Liste des publications de siren2 : ");
-    const sirenPublications2 = await megalisV2Contract.getSirenPublications("Siren2");
-    console.table(sirenPublications2);
     */
 
 }
