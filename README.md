@@ -1,98 +1,72 @@
-## Megalis Project - V1 du Smart Contract
+# Megalis Document Timestamping Contracts
 
-### _I. Pour commencer voici les fonctionnalités que possède le SmartContract :_
+> **Status: Academic / learning project (2022)** — historical Solidity
+> prototype. The contracts have not been audited and must not be used in
+> production.
 
-##### Version 1 :
-- Fonction avec signature : 
+Megalis explores how a public blockchain can timestamp references to documents
+published by local authorities. A publication associates an organisation
+identifier (SIREN), a document URL and the block timestamp. The first iteration
+also stores a separate document hash.
+
+This repository contains three successive versions of the idea rather than one
+production-ready contract.
+
+## Contract iterations
+
+- **V1** stores the publisher address, SIREN, document URL, document hash and
+  timestamp.
+- **V2** removes duplicated information to reduce storage costs.
+- **V3** further simplifies the stored publication and experiments with a
+  deletion function.
+
+Each version can:
+
+- publish a document reference;
+- list the SIRENs that have published at least once;
+- return the publications associated with a SIREN;
+- emit an event when a new publication is registered.
+
+## Stack
+
+- Solidity 0.8
+- Hardhat
+- ethers.js
+- JavaScript deployment and interaction scripts
+
+## Related interface
+
+The companion React interface is available in
+[Megalis-Frontend](https://github.com/JulienEsbt/Megalis-Frontend).
+
+## Local exploration
+
+```bash
+git clone https://github.com/JulienEsbt/Megalis-Smart-Contract.git
+cd Megalis-Smart-Contract
+npm ci
+npx hardhat compile
 ```
-fonction publier (siren, url_doc, hash_doc)
--> Ajoute une publication avec les infos données en paramètre au smart contract et la publie donc dans la blockchain,
-   avec ainsi l'horodatage offert par le block dans lequel cette publication (transaction) est posté.
-```
 
-- Fonction sans signature : 
-```
-fonction listerSirens ()
--> Retourne un tableau contenant tous les Sirens ayant publier quelque chose dans notre smart contract.
+The checked-in network configuration targets historical testnets. Use a local
+Hardhat network and review the configuration before running deployment or
+interaction scripts. Never commit wallet private keys or provider credentials.
 
-fonction listerPublication(siren)
--> Retourne un tableau contenant toutes les publications d'un Siren entré en paramètre
-```
+## Important limitations
 
-##### Version 2 :
-Dans la version deux, nous avons les mêmes fonctionnalités mais avec la suppression du hash du document publié, puisque celui-ci est dans l'Url du document, et que cela prends de la place (et donc a un coût) lors de la publication.
+- the code has no automated contract test suite;
+- no external security review has been performed;
+- a SIREN is a string supplied by the caller and does not prove identity;
+- V3 does not restrict its deletion function to the original publisher;
+- deleting an array entry in V3 leaves an empty slot rather than compacting the
+  publication list;
+- several configured Ethereum testnets have been retired;
+- all data written to a public blockchain should be considered public.
 
-#
-### _II. Voici comment l'installer, le déployer, interagir avec, ou le modifier :_
-##### a. Installer :
-1. Le cloner sur votre machine depuis le Git
-2. Installer les modules nécessaires (hardhat, ethers, dotenv, ...) via la commande : ```npm install```
+These limitations are intentionally documented to preserve the project as an
+example of an iterative learning process, not as a deployable public-service
+system.
 
-##### b. Modifier : 
-Une fois le smart contract modifier comme vous le souhaitez, vous pouvez le compiler via la commande ```npx hardhat compile```, afin de voir s'il contient des erreurs. Si vous modifiez le fichier ".sol", vous devez impérativement importer le nouveau fichier "../artifacts/contracts/smartContractName.sol/smartContractName.json" à votre frontend. Dans ce project back ce n'est pas nécessaire et fait automatiquement.
+## License
 
-##### c. Déployer : 
-1. Vérifier le fichier "deployV2.js" et "hardhat.config.js" qui sont normalement déjà prêt à l'emploi (à adapter en fonction du point suivant) ;
-2. Créer un fichier ".env" (dotenv) dans lequel vous referencerez les constantes nécessaires (celle dont vous avez besoin dans hardhat.config.js).
-Par exemple, vous aurez au moins besoin d'une clé privée et d'une clé API, vous aurez donc :
-
-- Dans voter fichier ".env" :
-```
-PRIVATE_KEY = "xxx"
-API_KEY = "xxx
-```
-
-- Dans votre fichier "hardha.config.js" :
-```
-const { PRIVATE_KEY, API_KEY } = process.env
-```
-
-Vous taperez donc la commande suivant et aurez comme résultat quelque chose comme ceci : 
-```
-cmd =       npx hardhat run scripts/deployV2.js --network networkNameThatYouChoose
-
-result =    Deploying contracts with the account: 0x82de905E53cB57Cfd7c1e9B7552a175756d96EFd
-            Contract address: 0x347a2ea7BC38A50B53a1197f4195a39d0692a893
-```
-L'adresse de votre nouveau smart contract sera ainsi : "0x347a2ea7BC38A50B53a1197f4195a39d0692a893", vous pourrez donc aller vérifier dans un "blockchain explorer" la création de ce contrat (Lien plus loin).
-
-##### d. Interagir : 
-1. Vous aurez besoin de 3 paramètres, que sont la clé privée, l'adresse du contrat et la clé API, il vous faudra donc les mettre à jour en fonction de votre fichier ".env". 
-2. Dans la fonction main, vous pouvez modifier le code afin d'appeler les fonctions du fichier ".sol" que vous voulez utiliser pour interagir avec le contrat.
-
-#
-### _III. Liens importants :_
-##### a. Docs :
-Ethers.js : https://docs.ethers.io/v5/  
-Web3.js : https://web3js.readthedocs.io/en/v1.7.3/index.html#   
-Ethereum : https://ethereum.org/en/developers/docs/     
-Hardhat : https://hardhat.org/getting-started   
-Metamask : https://docs.metamask.io/guide/  
-WalletConnect : https://docs.walletconnect.com/     
-JavaScript : https://devdocs.io/javascript/     
-
-##### b. Explorer : 
-Ethereum (Mainnet) : https://etherscan.io/    
-Ropsten (Ethereum Testnet) : https://ropsten.etherscan.io/    
-Goerli (Ethereum Testnet) : https://goerli.etherscan.io/  
-Rinkeby (Ethereum Testnet) : https://rinkeby.etherscan.io/    
-Kovan (Ethereum Testnet) : https://kovan.etherscan.io/    
-Gnosis (Mainnet - XDai Chain) : https://blockscout.com/xdai/mainnet/  
-Polygon (Mainnet - Matic) : https://polygonscan.com/     
-Mumbai (Polygon Testnet) : https://mumbai.polygonscan.com/
-
-##### c. Providers : 
-Alchemy : https://dashboard.alchemyapi.io/  
-Blast : https://blastapi.io/dashboard   
-Infura : https://infura.io/dashboard    
-GetBlock : https://account.getblock.io/     
-Moralis : https://docs.moralis.io/introduction/readme   
-
-##### d. Autres : 
-ChainList : https://chainlist.org/  
-Chainlink faucet : https://faucets.chain.link/  
-Metamask faucet : https://faucet.metamask.io/   
-
-
-
-### **_ESTERBET Julien - SIB._**
+No open-source license has been selected for this academic repository.
